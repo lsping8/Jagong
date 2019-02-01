@@ -7,7 +7,7 @@ const socket = io.connect("http://localhost:3000/", {
 socket.on('connect', () => {
     console.log('connected to localhost:3000');
     socket.on('soundTheGong', () => {
-        exec('code');
+        exec('python stepper.py');
         console.log('GONG');
     });
 });
