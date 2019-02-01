@@ -23,7 +23,7 @@ app.get('/gong', (req, res) => {
             gateOpen = false;
             slave.emit('soundTheGong');
             res.send(`GONG ${slave.client.id}`);
-            setTimeout(() => { gateOpen = true }, 5000);
+            setTimeout(() => { gateOpen = true }, 6000);
         } else {
             res.send('GONG is busy');
         }
