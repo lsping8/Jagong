@@ -19,19 +19,38 @@ io.on('connection', (socket) => {
 
 app.get('/gong', (req, res) => {
     if (Object.keys(slave).length !== 0) {
-        if(gateOpen) {
+        if (gateOpen) {
             gateOpen = false;
             slave.emit('soundTheGong');
+            res.status(200);
             res.send(`GONG ${slave.client.id}`);
             setTimeout(() => { gateOpen = true }, 6000);
         } else {
+            res.status(503);
             res.send('GONG is busy');
         }
-        
     } else {
+        res.status(404);
         res.send('GONG is down!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     }
-    
+});
+
+app.post('/gong', (req, res) => {
+    if (Object.keys(slave).length !== 0) {
+        if (gateOpen) {
+            gateOpen = false;
+            slave.emit('soundTheGong');
+            res.status(200);
+            res.send(`GONG ${slave.client.id}`);
+            setTimeout(() => { gateOpen = true }, 6000);
+        } else {
+            res.status(503);
+            res.send('GONG is busy');
+        }
+    } else {
+        res.status(404);
+        res.send('GONG is down!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    }
 });
 
 server.listen(3000);
